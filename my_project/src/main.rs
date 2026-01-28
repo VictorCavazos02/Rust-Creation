@@ -8,4 +8,8 @@
 
 fn main() {
     println!("Hello VICTOR CAVAZOS!");
+
+    let x = 10;
+
+    println!("5*2 = {}",x);
 }

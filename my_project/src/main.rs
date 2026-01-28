@@ -6,6 +6,20 @@
 
 
 
+fn say_hi(x:i32){
+    println!("Hi John! My favoirite number is {}", x)
+}
+
+fn double(x:i32) -> i32 {
+    //return x*2;
+    //x*2 //also acceptable
+    let y = 10;
+    x*2*y
+}
+    
+    
+
+
 fn main() {
     println!("Hello VICTOR CAVAZOS!");
 
@@ -29,16 +43,7 @@ fn main() {
     println!("{}",x);
     */
 
-    
-    // Shadowing
-    let x = 5;
-    let x = x + 1;  // Creates a new variable
-    
-    // Mutation
-    let mut y = 5;
-    y = y + 1;  // Modifies the existing variable
-    
-    println!("x: {}, y: {}", x, y);
-
+    say_hi(5);
+    println!("Double {} is = {}",5,double(5));
 
 }

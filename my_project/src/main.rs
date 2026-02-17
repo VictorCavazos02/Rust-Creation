@@ -102,7 +102,7 @@ fn main() {
     }
     println!("The largest number in the array is {}...", largest_num);
 
-    
+    }else if select_program.trim() == "3"{
         // Part 3-------------------------------------------------------------------------------------
         let mut secret_number = 39;
         let hard_coded_guesses = [2, 100, 22, 80, 39, 90];

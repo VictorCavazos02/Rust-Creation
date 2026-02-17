@@ -36,15 +36,10 @@ fn check_guess(guess: i32, secret: i32) -> i32{
 }
     
 
-use std::io;
+
 fn main() {
 
-    //Not required, just made it personally easier for me to debug with a menu so I looked up how to do it
-    let mut select_program: String = String::new();
-    io::stdin().read_line(&mut select_program).expect("Unable to read Stdin");
-    
-    println!("You entered: {}", select_program);
-    if select_program.trim() == "1"{
+
 
     // Part 1--------------------------------------------------------------------------------------
     
@@ -60,7 +55,7 @@ fn main() {
         println!("Number {} degrees celsius converted to fahrenheit is: {} degrees\n", _temp_changing, celsius_to_fahrenheit(_temp_changing as f64) as f64);
         _temp_changing += 1.0;
     }
-    }else if select_program.trim() == "2"{
+
 
     // Part 2--------------------------------------------------------------------------------------
 
@@ -102,7 +97,6 @@ fn main() {
     }
     println!("The largest number in the array is {}...", largest_num);
 
-    }else if select_program.trim() == "3"{
         // Part 3-------------------------------------------------------------------------------------
         let mut secret_number = 39;
         let hard_coded_guesses = [2, 100, 22, 80, 39, 90];
@@ -116,5 +110,5 @@ fn main() {
         }
         println!("Congratulations! It took you {} attempts to guess the secret number!", idx);
 
-    }
+    
 }

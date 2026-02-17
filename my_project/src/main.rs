@@ -108,7 +108,7 @@ fn main() {
             }else{println!("Error found during guess checking loop...");}
             idx += 1;
         }
-        println!("Congratulations! It took you {} attempts to guess the secret number!", idx);
+        println!("Congratulations! It took you {} attempts to guess the secret number!", idx+1);
 
     
 }

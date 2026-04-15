@@ -1,110 +1,68 @@
-// // // //let add = |x: i32, y: i32| x + y;
-// // // //println!("5 + 3 = {}", add(5, 3)); // Output: 5 + 3 = 8
-
-// // // fn main() {
-
-// // //     let operation = |a: i32, b: i32| {a * b};
-
-// // //     println!("Task #1:");
-// // //     println!("Result: {}\n", operation(10, 5));
-
-
-// // // }
-// // // End Task 1
-
-// // fn track_changes() {
-// //     let mut tracker = 0;
-// //     let mut update = || {
-// //         // Your implementation here
-// //         tracker += 1;
-// //         println!("The tracker's current value is: {}", tracker);
-// //     };
-
-// //     update();
-// //     update();
-// // }
-
-// // fn main() {
-// //     track_changes();
-// // }
-// //End Of Task 2
-// fn process_vector<F>(vec: Vec<i32>, f: F) -> Vec<i32>
-// where
-//     F: Fn(i32) -> i32,
-// {
-//     let mut result = Vec::new();
-//     for x in vec {
-//         result.push(f(x)); // Apply the closure
-//     }
-//     result
-// }
-
-// fn main() {
-//     let numbers = vec![1, 2, 3];
-
-//     let doubled = process_vector(numbers.clone(), |x| {
-//         x * 2
-//     });
-
-//     let replaced = process_vector(numbers, |x| {
-//         if x > 2 {
-//             0
-//         } else {
-//             x
-//         }
-//     });
-
-//     println!("Doubled: {:?}", doubled);
-//     println!("Replaced: {:?}", replaced);
-// }
-// //End of #3
-
-use std::{thread, time::Duration};
-
-struct ComputeCache<T>
-where
-    T: Fn() -> String,
-{
-    computation: T,
-    result: Option<String>,
-}
-
-impl<T> ComputeCache<T>
-where
-    T: Fn() -> String,
-{
-    fn new(computation: T) -> Self {
-        ComputeCache {
-            computation,
-            result: None,
-        }
-    }
-
-    fn get_result(&mut self) -> String {
-        match &self.result {
-            Some(v) => {
-                println!("Retrieved from cache instantly");
-                v.clone()
-            }
-            None => {
-                let v = (self.computation)();
-                self.result = Some(v.clone());
-                v
-            }
-        }
-    }
-}
+/*
+use std::thread;
+use std::time::Duration;
 
 fn main() {
-    let mut cache = ComputeCache::new(|| {
-        println!("Computing (this will take 2 seconds)...");
-        thread::sleep(Duration::from_secs(2));
-        "Hello, world!".to_string()
-    });
-
-    println!("First call:");
-    println!("Result: {}", cache.get_result());
+    println!("Main thread starting");
     
-    println!("\nSecond call:");
-    println!("Result (cached): {}", cache.get_result());
+    // TODO: Create a vector to store thread handles
+    let mut handles = vec![];
+    
+    // TODO: Spawn 3 threads
+    for i in 1..=3 {
+        // TODO: Spawn a thread and store its handle
+        let handle = thread::spawn(move || {
+            // Simulate some work
+            println!("Thread {} starting", i);
+            thread::sleep(Duration::from_millis(500));
+            println!("Thread {} finished", i);
+        });
+        
+        // TODO: Store the handle
+        handles.push(handle);
+    }
+    
+    // TODO: Wait for all threads to complete
+    for handle in handles{
+    handle.join().unwrap();
+    }
+    println!("All threads completed.");
+}
+*/
+
+use std::sync::{Arc, Mutex};
+
+
+fn main() {
+    // TODO: Create a shared counter using Arc and Mutex
+    let cnt = Arc::new(Mutex::new(0));
+    
+    // TODO: Create a vector to store thread handles
+    let mut handles = vec![];
+    
+    // TODO: Spawn 5 threads
+    for i in 1..=5 {
+        // TODO: Clone the Arc for the thread
+        let thread = {
+            let cnt1 = cnt.clone();
+            std::thread::spawn(move || {
+                for j in 0..10{
+                    *cnt1.lock().unwrap() += 1;
+                    println!("Thread {} at step {}", i, j);
+                }
+            })
+        };
+        
+        // TODO: Spawn a thread that increments the counter 10 times
+        handles.push(thread);
+    }
+    
+    // TODO: Wait for all threads to complete
+    for handle in handles{
+        handle.join().unwrap();
+    }
+    
+    // TODO: Print the final value of the counter
+    println!("The final value of coutner is: {}", *cnt.lock().unwrap());
+    
 }

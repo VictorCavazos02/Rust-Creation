@@ -1,6 +1,7 @@
 
+//Victor Cavazos
+//use std::sync::{mpsc, Arc, Mutex};
 use std::sync::{mpsc, Arc, Mutex};
-
 use std::thread;
 
 // Message to be sent to the workers
@@ -68,6 +69,7 @@ impl Drop for ThreadPool {
 
 // Worker struct represents a thread that can process jobs
 struct Worker {
+
     id: usize,
     thread: Option<thread::JoinHandle<()>>,
 }
@@ -97,7 +99,7 @@ impl Worker {
     }
 }
 
-fn main() {
+fn problem3() {
     let pool = ThreadPool::new(4);
 
     for i in 1..=10 {
@@ -112,15 +114,16 @@ fn main() {
 }
 
 
-use std::sync::{mpsc, Arc, Mutex};
-use std::thread;
+
+
+//use std::thread;
 use std::time::Duration;
 use rand::Rng;
 
 // Define a special value that will signal termination
 const TERMINATION_SIGNAL: i32 = -1;
 
-fn main() {
+fn problem4() {
     const ITEM_COUNT: usize = 20;
 
     // Create channel
@@ -202,4 +205,13 @@ fn consumer(id: usize, rx: Arc<Mutex<mpsc::Receiver<i32>>>) {
     }
 
     println!("Consumer {} exiting", id);
+
+}
+
+fn main(){
+    println!("-------------------------------------------------------------------\nProblem 3:");
+    problem3();
+
+    println!("-------------------------------------------------------------------\nProblem 4:");
+    problem4();
 }
